@@ -77,16 +77,20 @@ ws.on('connection', function (con) {
 	sinfo.id = -1;
 	sinfo.sock = con;
 	sinfo.user = "nologin";
+	con.sinfo = sinfo;
 	con.on('message', function(data) {
 		//  xxx
-		var  msg = data.split(' ');
-		if(con.user == "nologin")
+		var  json = JSON.parse(data);
+		if(con.sinfo.user == "nologin")
 		{
-			if(msg[0]!="@login")
+			//  only accept login command
+			if(json.command!="login")
 			{
-				console.log("At not login status, first msg must be start at'@login'.");
+				console.log("not login status, command must be 'login'.");
 				return;
 			}
+			var ret = login(con, json);
+			return;
 		}
 	});
 
@@ -111,12 +115,19 @@ ws.on('connection', function (con) {
 
 
 /*======================================================================*
- *  Websocketメッセージ受信時の処理
+ *  login
  *----------------------------------------------------------------------*/
-function onRecvMsg(message)
+function login(con, json)
 {
-	console.log("====> websocket message comes.");
-	console.log("        message = " + message);
+	var  ret=false;;
+
+	console.log("try login");
+
+
+
+	console.log("logn success.");
+	ret = true;
+	return ret;
 }
 
 
