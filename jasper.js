@@ -92,6 +92,16 @@ ws.on('connection', function (con) {
 			var ret = login(con, json);
 			return;
 		}
+
+		switch(json.command)
+		{
+		case "adduser":
+			console.log("command:adduser");
+			break;
+		default:
+			console.log("session logined.");
+			break;
+		}
 	});
 
 	//  xxx
