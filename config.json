@@ -1,5 +1,6 @@
 {
     "general" : {
-        "port" : "5963"
+        "port" : "5963",
+	"admin" : "admin"
     }
 }
